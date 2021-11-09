@@ -1,0 +1,13 @@
+language: node_js
+
+services:
+  - docker
+
+script:
+  - docker --version # print version of docker for logging
+  - docker build -t simple_node .
+  - docker tag simple_node higharc91/docker-travis-ci-example:latest
+
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin # using EV and piping password in through stdin
+  - docker push higharc91/docker-travis-ci-example
