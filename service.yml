@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: first-k8-app
+  labels:
+    run: first-k8-app
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+  selector:
+    run: my-app
